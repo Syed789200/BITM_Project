@@ -1,0 +1,385 @@
+goals=int(input())
+size=int(input())
+l=list(map(int,input().split()))
+max=0
+for i in range(0,len(l)):
+    sub=l[i:i+size]
+    k=1
+    s=0
+    for j in sub:
+        s+=(j*k)
+        k+=1
+        if  s>max:
+            max=s
+print(max) def count_returns_to_start(N, A):
+    current_position = 0
+    return_count = 0
+    
+    for move in A:
+        current_position += move
+        if current_position == 0:
+            return_count += 1
+            
+    return return_count
+
+# Example usage:
+N = int(input())
+A = list(map(int,input().split())) # Example moves
+result = count_returns_to_start(N, A)
+print(result)  # Output: 3 def total_chocolates_for_A(chocolates):
+    total_chocolates_A = 0
+    
+    # Iterate through each jar
+    for jar in chocolates:
+        # Full cycles where A gets 1 chocolate per cycle
+        total_chocolates_A += jar // 3
+        
+        # If there are leftover chocolates and A gets 1 more
+        if jar % 3 >= 1:
+            total_chocolates_A += 1
+            
+    return total_chocolates_A
+jar=int(input())
+chocolates=list(map(int,input(). split ()))
+print(total_chocolates_for_A(chocolates)) def max_problems_solved(N, P):
+    # Total available time for solving problems (240 minutes minus travel time)
+    remaining_time = 240 - P
+    
+    # Initialize counters for time and problems solved
+    time_spent = 0
+    count = 0
+    
+    # Iterate over problems from 1 to N
+    for i in range(1, N + 1):
+        # Time to solve the ith problem
+        time_to_solve = 5 * i
+        
+        # Check if there's enough time left to solve this problem
+        if time_spent + time_to_solve > remaining_time:
+            break  # Max can't solve more problems
+        
+        # Update the time spent and count of problems solved
+        time_spent += time_to_solve
+        count += 1
+    
+    return count
+N=int(input())
+P=int(input())
+result=max_problems_solved(N,P)
+print(result) def dog_age_in_human_years(N):
+    return N * 7
+N=int(input())
+print(dog_age_in_human_years(N)) n=int(input())
+arr=list(map(int,input().split()))
+d={ }
+if n==1:
+    print(arr[0])
+else:
+    for i in arr:
+        if i not in d:
+            d[i]=1
+        else:
+            d[i]+=1
+    x=sorted(d.items(),key=lambda x:x[1], reverse =True)
+    if x[0][1]==x[1][1]:
+        print(-1)
+    else:
+        print(x[0][0]) s=input()
+v='aeiou' 
+d={ }
+mx=0
+for i in s:
+    if i in v:
+        if i in d:
+            d[i]+=1
+        else:
+            d[i]=1
+        if d[i]>mx:
+            mx=d[i]
+            ans=i
+print(ans) from collections import defaultdict
+
+def prime_factors(num):
+    factors = defaultdict(int)
+    
+    while num % 2 == 0:
+        factors[2] += 1
+        num //= 2
+    for i in range(3, int(num**0.5) + 1, 2):
+        while num % i == 0:
+            factors[i] += 1
+            num //= i
+    if num > 2:
+        factors[num] += 1
+    
+    return factors
+
+def calculate_prime_index_sum(arr, num):
+    if not arr:
+        return -1
+    
+    factors = prime_factors(num)
+    total_sum = 0
+    valid_prime_found = False
+    
+    for prime, power in factors.items():
+        if prime < len(arr):  
+            total_sum += power * arr[prime]
+            valid_prime_found = True
+    
+    return total_sum if valid_prime_found else 0
+
+
+if __name__ == "__main__":
+    n = int(input())  
+    arr = list(map(int, input().split()))  
+    num = int(input()) 
+
+    result = calculate_prime_index_sum(arr, num)
+    print(result) def count_spaces(S):
+    return S.count(' ')
+
+# Example usage
+S =input()
+space_count = count_spaces(S)
+print(space_count) def count_triplets(arr, n, m):
+    unique_triplets = set()  
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if arr[i] * arr[j] * arr[k] == m:
+                    triplet = tuple(sorted([arr[i], arr[j], arr[k]]))
+                    unique_triplets.add(triplet)
+    
+    return len(unique_triplets)
+
+# Input Reading
+n = int(input())               
+arr = list(map(int, input().split()))  
+m = int(input())               
+
+result = count_triplets(arr, n, m)
+print(result) def min_sum(arr):
+    arr.sort(reverse=True)
+    total = arr[0]
+    avg = arr[0]
+    
+    for i in range(1, len(arr)):
+        if arr[i] < avg:
+            break
+        total += arr[i]
+        avg = (total) / (i + 1)
+    
+    return total
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+result = min_sum(arr)
+print(result) from collections import Counter
+
+def min_steps_to_magic_string(S):
+    if len(set(S)) == 1:
+        return 0
+    
+    freq = Counter(S)
+    
+    max_freq = max(freq.values())
+    
+    return len(S) - max_freq
+
+S = input()
+
+result = min_steps_to_magic_string(S)
+print(result) import math
+
+def is_prime(num):
+    if num <= 1:
+        return False
+    if num == 2:
+        return True
+    if num % 2 == 0:
+        return False
+    for i in range(3, int(math.sqrt(num)) + 1, 2):
+        if num % i == 0:
+            return False
+    return True
+
+def next_prime(N):
+    candidate = N + 1
+    while True:
+        if is_prime(candidate):
+            return candidate
+        candidate += 1
+
+# Input reading
+N = int(input())
+result = next_prime(N)
+print(result) from collections import Counter
+
+def min_steps_to_magic_string(S):
+    if len(set(S)) == 1:
+        return 0
+    
+    freq = Counter(S)
+    
+    max_freq = max(freq.values())
+    
+    return len(S) - max_freq
+
+S = input()
+
+result = min_steps_to_magic_string(S)
+print(result) def encode_number(N):
+    str_N = str(N)
+    encoded_str = ""
+    
+    for digit in str_N:
+        squared_digit = int(digit) ** 2  # Square the digit
+        encoded_str += str(squared_digit)  
+    
+    encoded_value = int(encoded_str)
+    
+    return encoded_value
+
+# Input reading
+N = int(input())
+
+result = encode_number(N)
+print(result) def find_equilibrium_position(N, A):
+    total_sum = sum(A)  
+    left_sum = 0  
+
+    for i in range(N):
+        right_sum = total_sum - left_sum - A[i]
+        
+        if left_sum == right_sum:
+            return i + 1  
+
+        left_sum += A[i]
+
+    return "NOT FOUND"
+
+# Input reading
+N = int(input())
+A = list(map(int, input().split()))
+result = find_equilibrium_position(N, A)
+print(result) import math
+
+def gcd(a, b):
+    return math.gcd(a, b)
+
+def lcm(a, b):
+    return (a * b) // gcd(a, b)
+
+# Input reading
+a, b = map(int, input().split())
+
+# Calculate GCD and LCM
+gcd_value = gcd(a, b)
+lcm_value = lcm(a, b)
+
+print(gcd_value)
+print(lcm_value) def missing_characters_to_pangram(input_string):
+    # Define the full alphabet
+    alphabet = set('abcdefghijklmnopqrstuvwxyz')
+    
+    input_chars = set(input_string.lower())
+    
+    missing_chars = alphabet - input_chars
+    
+    sorted_missing_chars = sorted(missing_chars)
+    
+    return ''.join(sorted_missing_chars)
+
+# Input reading
+input_string = input()
+result = missing_characters_to_pangram(input_string)
+print(result) def two_sum(nums, target):
+
+  num_to_index = {}
+  for i, num in enumerate(nums):
+    complement = target - num
+    if complement in num_to_index:
+      return [num_to_index[complement], i]
+    num_to_index[num] = i
+
+  raise ValueError("No two numbers add up to the target sum.")
+nums = list(map(int,input().split()))
+target = int(input())
+indices = two_sum(nums, target)
+print(indices) def reverse_words(string):
+    words = string.split()  
+    words.reverse()  
+    reversed_string = " ".join(words)  
+    return reversed_string
+input_string = input()
+reversed_string = reverse_words(input_string)
+print(reversed_string) def find_peak_element(arr):
+  n = len(arr)
+  if n == 1:
+    return 0
+
+  if arr[0] > arr[1]:
+    return 0
+
+  if arr[n - 1] > arr[n - 2]:
+    return n - 1
+
+  for i in range(1, n - 1):
+    if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+      return i
+
+  return -1
+n = int(input())
+arr = list(map(int, input().split()))
+index = find_peak_element(arr)
+
+if index != -1:
+  print(index)
+else:
+  print("No peak element found.") def max_subarray_sum(nums):
+    max_so_far = nums[0]
+    curr_max = nums[0]
+
+    for num in nums[1:]:
+        curr_max = max(num, curr_max + num)
+        max_so_far = max(max_so_far, curr_max)
+
+    return max_so_far
+n = int(input())
+nums = list(map(int, input().split()))
+max_sum = max_subarray_sum(nums)
+print(max_sum) def find_farthest_coordinate(arr):
+  current_position = 0
+  max_distance = 0
+
+  for i in range(len(arr)):
+    current_position += arr[i]
+    max_distance = max(max_distance, abs(current_position))
+
+  return max_distance
+arr = list(map(int,input(). split()))
+result = find_farthest_coordinate(arr)
+print(result) def last_candy_recipient(N, K, A):
+    last_child = (A - 1 + K - 1) % N + 1
+    return last_child
+
+# Example usage:
+N, K, A = map(int, input().strip().split())
+print(last_candy_recipient(N, K, A)) def min_key_presses(s):
+    target = int(s)
+    presses = 0
+    
+    while target > 0:
+        if target % 100 == 0:
+            target //= 100
+        else:
+            target //= 10
+        presses += 1
+    
+    return presses
+
+# Example usage:
+s = input().strip()  
+print(min_key_presses(s))
